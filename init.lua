@@ -230,6 +230,19 @@ require('lazy').setup({
     --end,
   },
 
+  -- Palenight Theme
+  {
+    "drewtempelmeyer/palenight.vim",
+    name = "palenight",
+    -- priority = 1000,
+    -- config = function()
+    --  vim.cmd.colorscheme 'palenight'
+    -- end,
+  },
+
+  -- Formatting
+  { "mhartington/formatter.nvim" },
+
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -364,7 +377,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Save when hitting Ctrl + s
 vim.keymap.set('n', '<C-s>', ':w<CR>', { silent = true })
 
--- Open file tree when hitting <leader> t t
+-- Open file tree when hitting <leader> t f
 vim.api.nvim_set_keymap('n', '<leader>tf', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 -- Format when hitting <leader> c f
@@ -377,7 +390,8 @@ vim.api.nvim_set_keymap('n', '<S-M-f>', ':Format<CR>', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<leader>tt', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 -- Auto-close brackets
-vim.api.nvim_set_keymap('i', '{', '{<CR>}<Esc>O', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('i', '{', '{<CR>}<Esc>O', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '{', '{}<Left>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '[', '[]<Left>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '(', '()<Left>', { noremap = true, silent = true })
 
@@ -407,6 +421,12 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+  },
+  pickers = {
+    find_files = {
+      find_command = {'rg', '--files', '--hidden', '--glob', '!.git/*', '--glob', '!node_modules/*'},
+      theme = "dropdown",
+    }
   },
 }
 
@@ -596,10 +616,66 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+-- Create a command `:Format` local to the LSP buffer
+--   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+--     vim.lsp.buf.format()
+--   end, { desc = 'Format current buffer with LSP' })
+
+require('formatter').setup({
+  filetype = {
+    html = {
+      function()
+        return {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+          stdin = true
+        }
+      end
+    },
+    css = {
+      function()
+        return {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+          stdin = true
+        }
+      end
+    },
+    javascript = {
+      function()
+        return {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote=false", "--semi=false" },
+          stdin = true
+        }
+      end
+    },
+    typescript = {
+      function()
+        return {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote=false", "--semi=false" },
+          stdin = true
+        }
+      end
+    },
+    javascriptreact = {
+      function()
+        return {
+          exe = "prettier",
+          args = {"--write", "--single-quote=false", "--semi=false", vim.fn.shellescape(vim.api.nvim_buf_get_name(0))},
+          stdin = false
+        }
+      end
+    },
+    -- add other filetypes similarly if needed
+  }
+})
+
+vim.api.nvim_buf_create_user_command(0, 'PrettierTest', function()
+  vim.cmd('!prettier --write ' .. vim.fn.shellescape(vim.api.nvim_buf_get_name(0)))
+end, { desc = 'Test Prettier formatting' })
+
 end
 
 -- document existing key chains
