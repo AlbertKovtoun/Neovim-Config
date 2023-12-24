@@ -223,20 +223,20 @@ require('lazy').setup({
   -- Gruvbox Theme
   {
     'ellisonleao/gruvbox.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'gruvbox'
-    end,
+    -- priority = 1000,
+    -- config = function()
+    --   vim.cmd.colorscheme 'gruvbox'
+    -- end,
   },
 
   -- Catppuccin Theme
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    --priority = 1000,
-    --config = function()
-    --  vim.cmd.colorscheme 'catppuccin'
-    --end,
+    priority = 1000,
+    config = function()
+     vim.cmd.colorscheme 'catppuccin-macchiato'
+    end,
   },
 
   -- Palenight Theme
@@ -259,7 +259,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'gruvbox',
+        theme = 'catppuccin-macchiato',
         component_separators = '|',
         section_separators = '',
       },
@@ -523,7 +523,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'glsl' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
