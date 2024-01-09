@@ -109,12 +109,16 @@ require('lazy').setup({
     end,
   },
 
-  -- Terminal
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
-
   -- Color colorizer
   {
     "norcalli/nvim-colorizer.lua",
+  },
+
+  -- Autoclose
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
   },
 
   -- Welcome Screen
@@ -125,6 +129,8 @@ require('lazy').setup({
         require'alpha'.setup(require'alpha.themes.startify'.config)
     end
   },
+
+  {'xiyaowong/transparent.nvim'},
 
   {
     -- Autocompletion
@@ -394,19 +400,6 @@ vim.api.nvim_set_keymap('n', '<leader>cf', ':Format<CR>', { noremap = true, sile
 
 --Format when hitting Shift + Alt + f
 vim.api.nvim_set_keymap('n', '<S-M-f>', ':Format<CR>', { noremap = true, silent = true })
-
---Toggle Terminal
-vim.api.nvim_set_keymap('n', '<leader>tt', ':ToggleTerm<CR>', { noremap = true, silent = true })
-
--- Auto-close brackets
--- vim.api.nvim_set_keymap('i', '{', '{<CR>}<Esc>O', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '{', '{}<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '[', '[]<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '(', '()<Left>', { noremap = true, silent = true })
-
--- Auto-close quotes
-vim.api.nvim_set_keymap('i', '"', '""<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', "'", "''<Left>", { noremap = true, silent = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
