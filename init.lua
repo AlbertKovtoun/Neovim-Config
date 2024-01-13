@@ -123,11 +123,9 @@ require('lazy').setup({
 
   -- Welcome Screen
   {
-    'goolord/alpha-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.startify'.config)
-    end
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" }
   },
 
   {'xiyaowong/transparent.nvim'},
@@ -258,6 +256,9 @@ require('lazy').setup({
   -- Formatting
   { "mhartington/formatter.nvim" },
 
+
+  {"mg979/vim-visual-multi"},
+  
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -386,7 +387,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Save when hitting Ctrl + s
@@ -440,8 +441,24 @@ augroup Colorizer
 augroup END
 ]]
 
--- [[Configure IBL]]
+-- [[Configure Harpoon]]
+local harpoon = require("harpoon")
 
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end, { desc='Harpoon add buffer'} )
+vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc='Harpoon list buffers' })
+
+vim.keymap.set("n", "<leader>b", function() harpoon:list():select(1) end, { desc='Harpoon buffer 1' })
+vim.keymap.set("n", "<leader>n", function() harpoon:list():select(2) end, { desc='Harpoon buffer 2' })
+vim.keymap.set("n", "<leader>m", function() harpoon:list():select(3) end, { desc='Harpoon buffer 3' })
+vim.keymap.set("n", "<leader>,", function() harpoon:list():select(4) end, { desc='Harpoon buffer 4' })
+
+-- Toggle previous & next buffers stored within Harpoon list (I dont really use this ):
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -569,7 +586,7 @@ vim.defer_fn(function()
       swap = {
         enable = true,
         swap_next = {
-          ['<leader>a'] = '@parameter.inner',
+          -- ['<leader>a'] = '@parameter.inner',
         },
         swap_previous = {
           ['<leader>A'] = '@parameter.inner',
