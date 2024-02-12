@@ -30,7 +30,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #24273a
+; background = #24273a
+background = #000000
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #cad3f5
@@ -55,7 +56,7 @@ line-size = 3
 line-color = #f00
 
 border-size = 0
-border-color = #00000000
+border-color = #000000
 
 padding-left = 0
 padding-right = 0
@@ -274,8 +275,8 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
-date-alt = " %Y-%m-%d"
+date = " %d-%m-%Y"
+date-alt = 
 
 time = %H:%M
 time-alt = %H:%M:%S
