@@ -213,20 +213,31 @@ new_window pixel 2
 new_float pixel 2
 
 # Set border colors for focused and unfocused windows
-client.focused          #8aadf4 #8aadf4 #8aadf4 #8aadf4
+# client.focused          #8aadf4 #8aadf4 #8aadf4 #8aadf4
+client.focused          #ffffff #ffffff #ffffff #ffffff
 client.unfocused        #000000 #000000 #000000 #000000
 client.focused_inactive #000000 #000000 #000000 #000000
 client.urgent           #FF0000 #FF0000 #FF0000 #FF0000
+
+# Gaps
+gaps inner 10
+gaps outer 10
 
 # Launch Nitrogen on startup
 # exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id bash -c "sleep 1; nitrogen --restore"
 
 # Setup Monitors
-exec_always --no-startup-id ~/setup_monitors.sh
+# exec_always --no-startup-id ~/setup_monitors.sh
 
 # Launch Polybar
 exec_always --no-startup-id killall -q polybar; polybar mybar &
 
 # Launch Picom (Compositor)
-exec_always --no-startup-id picom --experimental-backends -b
+exec_always --no-startup-id picom -b
+
+# Make caps lock an additional ctr
+exec_always --no-startup-id setxkbmap -option ctrl:nocaps
+
+# Faster cursor speed
+exec_always --no-startup-id xset r rate 250 30

@@ -31,19 +31,19 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 ; background = #24273a
-background = #000000
-background-alt = #444
+background = #00000000
+background-alt = #00000000
 ;foreground = ${xrdb:color7:#222}
 foreground = #cad3f5
 foreground-alt = #555
-primary = #8aadf4
+primary = #ffffff
 secondary = #e60053
 alert = #bd2c40
 
 [bar/mybar]
 monitor = ${env:MONITOR:HDMI-0}
 width = 100%
-height = 40
+height = 35
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
