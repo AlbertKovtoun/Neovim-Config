@@ -237,10 +237,10 @@ require('lazy').setup({
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000,
-    config = function()
-     vim.cmd.colorscheme 'catppuccin-macchiato'
-    end,
+    -- priority = 1000,
+    -- config = function()
+    --  vim.cmd.colorscheme 'catppuccin-macchiato'
+    -- end,
   },
 
   -- Palenight Theme
@@ -251,6 +251,26 @@ require('lazy').setup({
     -- config = function()
     --  vim.cmd.colorscheme 'palenight'
     -- end,
+  },
+
+  -- Kanagawa Theme
+  {
+    "rebelot/kanagawa.nvim",
+    name = "kanagawa",
+    -- priority = 1000,
+    -- config = function()
+    --  vim.cmd.colorscheme 'kanagawa'
+    -- end,
+  },
+
+  -- One Dark
+  {
+    "navarasu/onedark.nvim",
+    name = "onedark",
+    priority = 1000,
+    config = function()
+     vim.cmd.colorscheme 'onedark'
+    end,
   },
 
   -- Formatting
@@ -266,7 +286,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'catppuccin-macchiato',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
@@ -447,6 +467,12 @@ local harpoon = require("harpoon")
 -- REQUIRED
 harpoon:setup()
 -- REQUIRED
+
+-- [[Configure Onedark]]
+-- require('onedark').setup {
+--   style = 'dark'
+-- }
+-- require('onedark').load()
 
 vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end, { desc='Harpoon add buffer'} )
 vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc='Harpoon list buffers' })

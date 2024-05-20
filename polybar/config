@@ -298,11 +298,11 @@ label-muted = 🔇 muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #8aadf4
-bar-volume-foreground-1 = #8aadf4
-bar-volume-foreground-2 = #8aadf4
-bar-volume-foreground-3 = #8aadf4
-bar-volume-foreground-4 = #8aadf4
+bar-volume-foreground-0 = #e06c75
+bar-volume-foreground-1 = #e06c75
+bar-volume-foreground-2 = #e06c75
+bar-volume-foreground-3 = #e06c75
+bar-volume-foreground-4 = #e06c75
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
