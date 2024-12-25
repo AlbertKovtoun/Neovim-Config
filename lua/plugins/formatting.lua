@@ -57,7 +57,8 @@ return {
       })
 
       -- Format when hitting Shift + Alt + f
-      vim.api.nvim_set_keymap("n", "<S-M-f>", ":Format<CR>", { noremap = true, silent = true })
+      -- vim.api.nvim_set_keymap("n", "<S-M-f>", ":Format<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<space>f", ":Format<CR>", { noremap = true, silent = true })
     end,
   },
 }

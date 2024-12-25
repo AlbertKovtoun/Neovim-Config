@@ -21,14 +21,24 @@ return {
     "olivercederborg/poimandres.nvim",
     init = function()
       -- Apply the colorscheme
-      vim.cmd([[colorscheme poimandres]])
+      -- vim.cmd([[colorscheme poimandres]])
 
       -- Modify the highlight for the current word under the cursor
-      vim.cmd([[
-      highlight LspReferenceText guibg=NONE guifg=NONE
-      highlight LspReferenceRead guibg=NONE guifg=NONE
-      highlight LspReferenceWrite guibg=NONE guifg=NONE
-    ]])
+      --   vim.cmd([[
+      --   highlight LspReferenceText guibg=NONE guifg=NONE
+      --   highlight LspReferenceRead guibg=NONE guifg=NONE
+      --   highlight LspReferenceWrite guibg=NONE guifg=NONE
+      -- ]])
+    end,
+  },
+
+  {
+    "aliqyan-21/darkvoid.nvim",
+    priority = 1000,
+    init = function()
+      vim.cmd("colorscheme darkvoid")
+      vim.opt.termguicolors = true
+      vim.cmd.hi("Comment gui=none")
     end,
   },
 
